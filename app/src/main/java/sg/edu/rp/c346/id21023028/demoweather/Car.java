@@ -4,9 +4,11 @@ import java.io.Serializable;
 
 public class Car implements Serializable {
     String carparkNumber;
+    int totalLots;
 
-    public Car(String carparkNumber) {
+    public Car(String carparkNumber, int totalLots) {
         this.carparkNumber = carparkNumber;
+        this.totalLots = totalLots;
     }
 
     public String getCarparkNumber() {
@@ -17,9 +19,18 @@ public class Car implements Serializable {
         this.carparkNumber = carparkNumber;
     }
 
+    public int getTotalLots() {
+        return totalLots;
+    }
+
+    public void setTotalLots(int totalLots) {
+        this.totalLots = totalLots;
+    }
+
     //to string
     @Override
     public String toString() {
-        return "Carpark Number: " + carparkNumber;
+        return "Carpark Number: " + carparkNumber + '\n' +
+                "Lots Available: " + totalLots;
     }
 }

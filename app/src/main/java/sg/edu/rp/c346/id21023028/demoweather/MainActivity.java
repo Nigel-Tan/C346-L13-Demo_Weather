@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Car> alCar = new ArrayList<Car>();
         client.get("https://api.data.gov.sg/v1/transport/carpark-availability", new JsonHttpResponseHandler() {
             String carparknumber;
+            int slots;
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -89,8 +90,10 @@ public class MainActivity extends AppCompatActivity {
                     for(int i = 0; i < jsonArrItems.length(); i++) {
                         JSONObject obj = jsonArrItems.getJSONObject(i); //get json object
                         carparknumber = obj.getString("carpark_number");
-                        Log.i("name", carparknumber);
-                        Car car = new Car(carparknumber);
+                        JSONArray jsonArrInfo = obj.getJSONArray("carpark_info");
+                        JSONObject obj2 = jsonArrInfo.getJSONObject(0);
+                        slots = obj2.getInt("lots_available");
+                        Car car = new Car(carparknumber,slots);
                         alCar.add(car);
                     }
                 }
